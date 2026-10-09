@@ -1,0 +1,38 @@
+[
+    {
+        "Id": "0a1b2c3d-0000-4000-8000-000000000001",
+        "Todo": "Review RAP behavior definition",
+        "LocalCreatedBy": "DEVELOPER",
+        "LocalCreatedAt": "2026-10-01T09:00:00.0000000Z",
+        "LocalLastChangedBy": "DEVELOPER",
+        "LocalLastChangedAt": "2026-10-01T09:00:00.0000000Z",
+        "LastChangedAt": "2026-10-01T09:00:00.0000000Z"
+    },
+    {
+        "Id": "0a1b2c3d-0000-4000-8000-000000000002",
+        "Todo": "Try sap.ui.mdc.Table personalization",
+        "LocalCreatedBy": "DEVELOPER",
+        "LocalCreatedAt": "2026-10-02T10:30:00.0000000Z",
+        "LocalLastChangedBy": "DEVELOPER",
+        "LocalLastChangedAt": "2026-10-03T14:10:00.0000000Z",
+        "LastChangedAt": "2026-10-03T14:10:00.0000000Z"
+    },
+    {
+        "Id": "0a1b2c3d-0000-4000-8000-000000000003",
+        "Todo": "Replace JSONModel CRUD with OData V4 submitBatch",
+        "LocalCreatedBy": "ADMIN",
+        "LocalCreatedAt": "2026-10-05T08:15:00.0000000Z",
+        "LocalLastChangedBy": "ADMIN",
+        "LocalLastChangedAt": "2026-10-05T08:15:00.0000000Z",
+        "LastChangedAt": "2026-10-05T08:15:00.0000000Z"
+    },
+    {
+        "Id": "0a1b2c3d-0000-4000-8000-000000000004",
+        "Todo": "Write OPA test for todo list",
+        "LocalCreatedBy": "ADMIN",
+        "LocalCreatedAt": "2026-10-08T16:45:00.0000000Z",
+        "LocalLastChangedBy": "ADMIN",
+        "LocalLastChangedAt": "2026-10-08T16:45:00.0000000Z",
+        "LastChangedAt": "2026-10-08T16:45:00.0000000Z"
+    }
+]

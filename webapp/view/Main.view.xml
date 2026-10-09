@@ -1,0 +1,98 @@
+<mvc:View controllerName="ztodo.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:mdc="sap.ui.mdc"
+    xmlns:mdcTable="sap.ui.mdc.table"
+    xmlns:mdcat="sap.ui.mdc.actiontoolbar"
+    height="100%">
+    <f:DynamicPage id="page"
+        toggleHeaderOnTitleClick="true"
+        showFooter="{ui>/editMode}">
+
+        <f:title>
+            <f:DynamicPageTitle id="pageTitle">
+                <f:heading>
+                    <Title id="pageHeading" text="{i18n>title}"/>
+                </f:heading>
+                <f:actions>
+                    <Button id="editButton"
+                        text="{i18n>edit}"
+                        type="Emphasized"
+                        visible="{= !${ui>/editMode} }"
+                        press=".onEdit"/>
+                </f:actions>
+            </f:DynamicPageTitle>
+        </f:title>
+
+        <f:header>
+            <f:DynamicPageHeader id="pageHeader" pinnable="true">
+                <!-- 편집 중에는 재조회(rebind)로 미저장 변경이 꼬이지 않도록 Go 버튼을 숨김 -->
+                <mdc:FilterBar id="filterBar"
+                    delegate='\{"name": "ztodo/delegate/TodoFilterBarDelegate", "payload": \{\}\}'
+                    showGoButton="{= !${ui>/editMode} }">
+                    <mdc:filterItems>
+                        <mdc:FilterField id="ffTodo"
+                            propertyKey="Todo"
+                            label="{i18n>todo}"
+                            dataType="sap.ui.model.type.String"
+                            conditions="{$filters>/conditions/Todo}"/>
+                        <mdc:FilterField id="ffCreatedBy"
+                            propertyKey="LocalCreatedBy"
+                            label="{i18n>createdBy}"
+                            dataType="sap.ui.model.type.String"
+                            conditions="{$filters>/conditions/LocalCreatedBy}"/>
+                    </mdc:filterItems>
+                </mdc:FilterBar>
+            </f:DynamicPageHeader>
+        </f:header>
+
+        <f:content>
+            <mdc:Table id="todoTable"
+                header="{i18n>tableHeader}"
+                delegate='\{"name": "ztodo/delegate/TodoTableDelegate", "payload": \{"collectionPath": "/ZC_TODO", "updateGroupId": "todoGroup"\}\}'
+                filter="filterBar"
+                p13nMode="Column,Sort"
+                selectionMode="Multi"
+                showRowCount="true"
+                threshold="50"
+                selectionChange=".onSelectionChange">
+                <mdc:type>
+                    <mdcTable:ResponsiveTableType id="todoTableType" growingMode="Scroll"/>
+                </mdc:type>
+                <mdc:actions>
+                    <mdcat:ActionToolbarAction id="addAction">
+                        <Button id="addButton" icon="sap-icon://add" text="{i18n>add}" press=".onAdd"/>
+                    </mdcat:ActionToolbarAction>
+                    <mdcat:ActionToolbarAction id="deleteAction">
+                        <Button id="deleteButton" icon="sap-icon://delete" text="{i18n>delete}"
+                            enabled="{ui>/hasSelection}" press=".onDelete"/>
+                    </mdcat:ActionToolbarAction>
+                </mdc:actions>
+                <mdc:columns>
+                    <!-- 행 데이터는 OData V4 컨텍스트에 직접 바인딩 (JSONModel 복사본 없음) -->
+                    <mdcTable:Column id="colTodo" propertyKey="Todo" header="{i18n>todo}">
+                        <Input id="inpTodo" value="{Todo}" editable="{ui>/editMode}"/>
+                    </mdcTable:Column>
+                    <mdcTable:Column id="colCreatedBy" propertyKey="LocalCreatedBy" header="{i18n>createdBy}">
+                        <Text id="txtCreatedBy" text="{LocalCreatedBy}"/>
+                    </mdcTable:Column>
+                    <mdcTable:Column id="colCreatedAt" propertyKey="LocalCreatedAt" header="{i18n>createdAt}">
+                        <Text id="txtCreatedAt" text="{LocalCreatedAt}"/>
+                    </mdcTable:Column>
+                    <mdcTable:Column id="colChangedAt" propertyKey="LocalLastChangedAt" header="{i18n>changedAt}">
+                        <Text id="txtChangedAt" text="{LocalLastChangedAt}"/>
+                    </mdcTable:Column>
+                </mdc:columns>
+            </mdc:Table>
+        </f:content>
+
+        <f:footer>
+            <OverflowToolbar id="footerToolbar">
+                <ToolbarSpacer id="footerSpacer"/>
+                <Button id="saveButton" text="{i18n>save}" type="Emphasized" press=".onSave"/>
+                <Button id="cancelButton" text="{i18n>cancel}" press=".onCancel"/>
+            </OverflowToolbar>
+        </f:footer>
+    </f:DynamicPage>
+</mvc:View>
